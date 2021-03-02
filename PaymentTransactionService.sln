@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentTransactionService", "PaymentTransactionService\PaymentTransactionService.csproj", "{FEAE6AAB-CAD2-4485-92F0-3A7481F90253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentTransactionService", "PaymentTransactionService\PaymentTransactionService.csproj", "{FEAE6AAB-CAD2-4485-92F0-3A7481F90253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentTransactionService.Tests", "PaymentTransactionService.Tests\PaymentTransactionService.Tests.csproj", "{AD1FEFD7-3FA9-47EC-B891-2697F81C6467}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FEAE6AAB-CAD2-4485-92F0-3A7481F90253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEAE6AAB-CAD2-4485-92F0-3A7481F90253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEAE6AAB-CAD2-4485-92F0-3A7481F90253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1FEFD7-3FA9-47EC-B891-2697F81C6467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1FEFD7-3FA9-47EC-B891-2697F81C6467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1FEFD7-3FA9-47EC-B891-2697F81C6467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1FEFD7-3FA9-47EC-B891-2697F81C6467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
