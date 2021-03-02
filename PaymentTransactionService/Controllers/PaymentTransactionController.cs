@@ -27,6 +27,7 @@ namespace PaymentTransactionService.Controllers
         public IActionResult Get(int id)
         {
             var payments = _paymentTransactionRepository.GetPaymentByUserId(id);
+            if(payments == null) return Content("User not found");
             return new OkObjectResult(payments);
         }
 

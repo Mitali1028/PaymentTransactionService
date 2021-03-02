@@ -20,6 +20,6 @@ namespace PaymentTransactionService.Data
         [JsonIgnore]
         public long UserPaymentTransactionId { get; set; }
         [JsonIgnore]
-        public UserPaymentTransaction UserPaymentTransaction { get; set; }
+        public User User { get; set; }
     }
 }

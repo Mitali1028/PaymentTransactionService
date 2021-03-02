@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PaymentTransactionService.Data
 {
-    public class UserPaymentTransaction
+    public class User
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

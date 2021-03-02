@@ -5,6 +5,6 @@ namespace PaymentTransactionService.Repositories
 {
     public interface IPaymentTransactionRepository
     {
-        List<UserPaymentTransaction> GetPaymentByUserId(int userId);
+        User GetPaymentByUserId(int userId);
     }
 }

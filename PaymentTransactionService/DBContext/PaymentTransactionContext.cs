@@ -14,13 +14,13 @@ namespace PaymentTransactionService.DBContext
         }
 
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
-        public DbSet<UserPaymentTransaction> UserPaymentTransactions { get; set; }
+        public DbSet<User> UserPaymentTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserPaymentTransaction>()
+            modelBuilder.Entity<User>()
                 .HasMany(b => b.Transactions)
-                .WithOne(x => x.UserPaymentTransaction).HasForeignKey(x => x.UserPaymentTransactionId);
+                .WithOne(x => x.User).HasForeignKey(x => x.UserPaymentTransactionId);
           
 
             modelBuilder.Entity<PaymentTransaction>().HasData(
@@ -39,7 +39,7 @@ namespace PaymentTransactionService.DBContext
                             UserPaymentTransactionId = 1
                         });
 
-            modelBuilder.Entity<UserPaymentTransaction>().HasData(new UserPaymentTransaction
+            modelBuilder.Entity<User>().HasData(new User
             {
                 Id = 1,
                 AmountBalance = 30000
