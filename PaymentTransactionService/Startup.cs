@@ -25,6 +25,7 @@ namespace PaymentTransactionService
             services.AddDbContext<PaymentTransactionContext>(o =>
                 o.UseSqlite(Configuration["Data:ConnectionStrings:PaymentDB"]));
             services.AddTransient<IPaymentTransactionRepository, PaymentTransactionRepository>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +46,8 @@ namespace PaymentTransactionService
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
         }
     }
 }
