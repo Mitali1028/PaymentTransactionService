@@ -28,14 +28,14 @@ namespace PaymentTransactionService.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Amount = table.Column<double>(type: "REAL", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserPaymentTransactionId = table.Column<long>(type: "INTEGER", nullable: false)
+                    UserId = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentTransactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PaymentTransactions_UserPaymentTransactions_UserPaymentTransactionId",
-                        column: x => x.UserPaymentTransactionId,
+                        name: "FK_PaymentTransactions_UserPaymentTransactions_UserId",
+                        column: x => x.UserId,
                         principalTable: "UserPaymentTransactions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -48,18 +48,18 @@ namespace PaymentTransactionService.Migrations
 
             migrationBuilder.InsertData(
                 table: "PaymentTransactions",
-                columns: new[] { "Id", "Amount", "PaymentDate", "UserPaymentTransactionId" },
+                columns: new[] { "Id", "Amount", "PaymentDate", "UserId" },
                 values: new object[] { 1L, 1500.0, new DateTime(2021, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L });
 
             migrationBuilder.InsertData(
                 table: "PaymentTransactions",
-                columns: new[] { "Id", "Amount", "PaymentDate", "UserPaymentTransactionId" },
+                columns: new[] { "Id", "Amount", "PaymentDate", "UserId" },
                 values: new object[] { 2L, 1700.5, new DateTime(2021, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentTransactions_UserPaymentTransactionId",
+                name: "IX_PaymentTransactions_UserId",
                 table: "PaymentTransactions",
-                column: "UserPaymentTransactionId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

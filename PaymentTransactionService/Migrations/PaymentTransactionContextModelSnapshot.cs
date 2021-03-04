@@ -28,12 +28,12 @@ namespace PaymentTransactionService.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("UserPaymentTransactionId")
+                    b.Property<long>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserPaymentTransactionId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("PaymentTransactions");
 
@@ -43,18 +43,18 @@ namespace PaymentTransactionService.Migrations
                             Id = 1L,
                             Amount = 1500.0,
                             PaymentDate = new DateTime(2021, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserPaymentTransactionId = 1L
+                            UserId = 1L
                         },
                         new
                         {
                             Id = 2L,
                             Amount = 1700.5,
                             PaymentDate = new DateTime(2021, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserPaymentTransactionId = 1L
+                            UserId = 1L
                         });
                 });
 
-            modelBuilder.Entity("PaymentTransactionService.Data.UserPaymentTransaction", b =>
+            modelBuilder.Entity("PaymentTransactionService.Data.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,16 +77,16 @@ namespace PaymentTransactionService.Migrations
 
             modelBuilder.Entity("PaymentTransactionService.Data.PaymentTransaction", b =>
                 {
-                    b.HasOne("PaymentTransactionService.Data.UserPaymentTransaction", "UserPaymentTransaction")
+                    b.HasOne("PaymentTransactionService.Data.User", "User")
                         .WithMany("Transactions")
-                        .HasForeignKey("UserPaymentTransactionId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserPaymentTransaction");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PaymentTransactionService.Data.UserPaymentTransaction", b =>
+            modelBuilder.Entity("PaymentTransactionService.Data.User", b =>
                 {
                     b.Navigation("Transactions");
                 });

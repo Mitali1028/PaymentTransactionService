@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using PaymentTransactionService.Data;
+﻿using PaymentTransactionService.Data;
 
 namespace PaymentTransactionService.Repositories
 {
     public interface IPaymentTransactionRepository
     {
-        User GetPaymentByUserId(int userId);
+        User GetUserPaymentTransactionsById(int userId);
     }
 }

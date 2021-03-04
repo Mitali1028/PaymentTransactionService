@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PaymentTransactionService.Data;
 
@@ -20,7 +17,7 @@ namespace PaymentTransactionService.DBContext
         {
             modelBuilder.Entity<User>()
                 .HasMany(b => b.Transactions)
-                .WithOne(x => x.User).HasForeignKey(x => x.UserPaymentTransactionId);
+                .WithOne(x => x.User).HasForeignKey(x => x.UserId);
           
 
             modelBuilder.Entity<PaymentTransaction>().HasData(
@@ -28,7 +25,7 @@ namespace PaymentTransactionService.DBContext
                         {
                             Id = 1,
                             Amount = 1500,
-                            UserPaymentTransactionId = 1,
+                            UserId = 1,
                             PaymentDate = new DateTime(2021, 1, 2)
                         },
                         new PaymentTransaction
@@ -36,7 +33,7 @@ namespace PaymentTransactionService.DBContext
                             Id = 2,
                             Amount = 1700.50,
                             PaymentDate = new DateTime(2021, 1, 25),
-                            UserPaymentTransactionId = 1
+                            UserId = 1
                         });
 
             modelBuilder.Entity<User>().HasData(new User

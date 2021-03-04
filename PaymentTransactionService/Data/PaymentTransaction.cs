@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace PaymentTransactionService.Data
 {
@@ -18,7 +15,7 @@ namespace PaymentTransactionService.Data
         public double Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         [JsonIgnore]
-        public long UserPaymentTransactionId { get; set; }
+        public long UserId { get; set; }
         [JsonIgnore]
         public User User { get; set; }
     }

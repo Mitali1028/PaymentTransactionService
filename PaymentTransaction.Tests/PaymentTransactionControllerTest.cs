@@ -2,14 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Newtonsoft.Json;
 using PaymentTransactionService.Controllers;
 using PaymentTransactionService.Data;
 using PaymentTransactionService.DBContext;
@@ -23,9 +18,36 @@ namespace PaymentTransactionService.Tests
     {
         private readonly Mock<IPaymentTransactionRepository> _mockPaymentTransactionRepository;
         private readonly PaymentTransactionController _controller;
+        private HttpClient _client;
+        private PaymentTransactionContext _dbContext;
+        private IConfiguration _configuration;
 
         public PaymentTransactionControllerTest()
         {
+            // some configuration for http end point testing.. 
+           // _configuration = new ConfigurationBuilder()
+           //     .AddJsonFile("appsettings.json")
+           //     .AddEnvironmentVariables()
+           //     .Build();
+           // var webHostBuilder = new WebHostBuilder()
+           //     .UseConfiguration(_configuration)
+           //     .UseStartup<Startup>()
+           //     .ConfigureTestServices(config =>
+           //         {
+           //             config.AddScoped(a => _mockPaymentTransactionRepository.Object);
+           //         }
+           //     );
+
+           // var testServer = new TestServer(webHostBuilder);
+           // _client = testServer.CreateClient();
+           // _client.DefaultRequestHeaders.Add("X-Authorization", "ABCD");
+
+           // var serviceProvider = testServer.Host.Services;
+
+           // _dbContext = serviceProvider.GetService<PaymentTransactionContext>();
+           //_dbContext.Database.Migrate();
+
+
             _mockPaymentTransactionRepository = new Mock<IPaymentTransactionRepository>();
             _controller = new PaymentTransactionController(_mockPaymentTransactionRepository.Object);
         }
@@ -33,7 +55,7 @@ namespace PaymentTransactionService.Tests
         [Fact]
         public void GetReturnsContentWithUserNotFound()
         {
-            _mockPaymentTransactionRepository.Setup(repo => repo.GetPaymentByUserId(2)).Returns((User) null);                                                          
+            _mockPaymentTransactionRepository.Setup(repo => repo.GetUserPaymentTransactionsById(2)).Returns((User) null);                                                          
 
             var result = _controller.Get(2);
 
@@ -45,7 +67,7 @@ namespace PaymentTransactionService.Tests
         [Fact]
         public void GetReturnsMatchingUserDetails()
         {
-            _mockPaymentTransactionRepository.Setup(repo => repo.GetPaymentByUserId(1)).Returns(GetTestSessions().FirstOrDefault(s => s.Id == 1));
+            _mockPaymentTransactionRepository.Setup(repo => repo.GetUserPaymentTransactionsById(1)).Returns(GetTestSessions().FirstOrDefault(s => s.Id == 1));
            
             var result = _controller.Get(1);
 
@@ -67,7 +89,7 @@ namespace PaymentTransactionService.Tests
                             Id = 1,
                             Amount = 1500,
                             PaymentDate = new DateTime(2021, 01, 11),
-                            UserPaymentTransactionId = 1
+                            UserId = 1
                         },
 
                         new PaymentTransaction()
@@ -75,7 +97,7 @@ namespace PaymentTransactionService.Tests
                         Id = 2,
                         Amount = 23.34,
                         PaymentDate = new DateTime(2021, 01, 12),
-                        UserPaymentTransactionId = 1
+                        UserId = 1
 
                         }
                     }

@@ -17,14 +17,14 @@ namespace PaymentTransactionService.Repositories
             _dbContext = dbContext;
         }
 
-        public User GetPaymentByUserId(int userId)
+        public User GetUserPaymentTransactionsById(int userId)
         {
           return (from e in _dbContext.UserPaymentTransactions where e.Id == userId
                 select new User
                 {
                     AmountBalance = e.AmountBalance,
                     Transactions =  _dbContext.PaymentTransactions.Where(p =>
-                        p.UserPaymentTransactionId == e.Id).OrderByDescending(a => a.PaymentDate).ToList(),
+                        p.UserId == e.Id).OrderByDescending(a => a.PaymentDate).ToList(),
                 }).FirstOrDefault();
         }
     }

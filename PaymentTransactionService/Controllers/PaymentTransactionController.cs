@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PaymentTransactionService.Repositories;
 
 namespace PaymentTransactionService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class PaymentTransactionController : ControllerBase
     {
@@ -15,38 +14,14 @@ namespace PaymentTransactionService.Controllers
         {
             _paymentTransactionRepository = paymentTransactionRepository;
         }
-        // GET: api/PaymentTransaction
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+      
         // GET: api/PaymentTransaction/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(int id)
         {
-            var payments = _paymentTransactionRepository.GetPaymentByUserId(id);
+            var payments = _paymentTransactionRepository.GetUserPaymentTransactionsById(id);
             if(payments == null) return Content("User not found");
             return new OkObjectResult(payments);
-        }
-
-        // POST: api/PaymentTransaction
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/PaymentTransaction/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
